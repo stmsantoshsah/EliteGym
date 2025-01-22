@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-
+import {ClipLoader} from 'react-spinners'
 export default function Contact() {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,7 +14,7 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let res = JSON.stringify(formData)
-   console.info(res);
+    console.info(res);
     setFormData({
       name: "",
       email: "",
@@ -37,7 +37,10 @@ export default function Contact() {
           <label htmlFor="message">Message</label>
           <input type="text" name="message" id="" onChange={handleChange} value={formData.message} />
         </div>
-        <button type='sumbit'>Send Message</button>
+        <button type='sumbit' disabled={loading} style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "15px" }}>
+          {loading && <ClipLoader size={20} color='white' />}
+          Send Message
+        </button>
       </form>
     </section>
   )
